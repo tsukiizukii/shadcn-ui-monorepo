@@ -1,0 +1,470 @@
+---
+title: "MDX Style Guide"
+description: "Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro."
+createdAt: "Jun 19 2024"
+heroImage: "./assets/blog-placeholder-1.jpg"
+---
+
+## はじめに
+
+Astroが標準サポートしている[GitHub Flavored Markdown（GFM）](https://github.github.com/gfm/)を基盤に、より動的なコンポーネントの活用を視野にAstroが提供している[MDX](https://mdxjs.com/)の統合環境を構築しました。また必要に応じて、[unified](https://unifiedjs.com/)のエコシステムで配布されているプラグインを追加して記法を拡張しています。
+
+当サイトはプロジェクト全体で[TailwindCSS](https://tailwindcss.com/)を使用しているため、記事の全体的なスタイリングは[tailwindcss-typography](https://tailwindcss.com/docs/typography-plugin)を利用しています。細かな調整は個別的に上書きして対応しています。下記の項目は、基本要素の簡易的なサンプルです。
+
+````md
+This top-level Markdown code block contains a nested `my-custom-lang` code block:
+
+```my-custom-lang
+This nested code block will only be highlighted using `my-custom-lang`
+if `injectLangsIntoNestedCodeBlocks` is enabled.
+```
+````
+
+```ansi
+[1;4mStandard ANSI colors:[0m
+- Dimmed:     [2;30m Black [2;31m Red [2;32m Green [2;33m Yellow [2;34m Blue [2;35m Magenta [2;36m Cyan [2;37m White [0m
+- Foreground: [30m Black [31m Red [32m Green [33m Yellow [34m Blue [35m Magenta [36m Cyan [37m White [0m
+- Background: [40m Black [41m Red [42m Green [43m Yellow [44m Blue [45m Magenta [46m Cyan [47m White [0m
+- Reversed:   [7;30m Black [7;31m Red [7;32m Green [7;33m Yellow [7;34m Blue [7;35m Magenta [7;36m Cyan [7;37m White [0m
+
+[1;4m8-bit colors (showing colors 160-171 as an example):[0m
+- Dimmed:     [2;38;5;160m 160 [2;38;5;161m 161 [2;38;5;162m 162 [2;38;5;163m 163 [2;38;5;164m 164 [2;38;5;165m 165 [2;38;5;166m 166 [2;38;5;167m 167 [2;38;5;168m 168 [2;38;5;169m 169 [2;38;5;170m 170 [2;38;5;171m 171 [0m
+- Foreground: [38;5;160m 160 [38;5;161m 161 [38;5;162m 162 [38;5;163m 163 [38;5;164m 164 [38;5;165m 165 [38;5;166m 166 [38;5;167m 167 [38;5;168m 168 [38;5;169m 169 [38;5;170m 170 [38;5;171m 171 [0m
+- Background: [48;5;160m 160 [48;5;161m 161 [48;5;162m 162 [48;5;163m 163 [48;5;164m 164 [48;5;165m 165 [48;5;166m 166 [48;5;167m 167 [48;5;168m 168 [48;5;169m 169 [48;5;170m 170 [48;5;171m 171 [0m
+- Reversed:   [7;38;5;160m 160 [7;38;5;161m 161 [7;38;5;162m 162 [7;38;5;163m 163 [7;38;5;164m 164 [7;38;5;165m 165 [7;38;5;166m 166 [7;38;5;167m 167 [7;38;5;168m 168 [7;38;5;169m 169 [7;38;5;170m 170 [7;38;5;171m 171 [0m
+
+[1;4m24-bit colors (full RGB):[0m
+- Dimmed:     [2;38;2;34;139;34m ForestGreen - RGB(34,139,34) [2;38;2;102;51;153m RebeccaPurple - RGB(102,51,153) [0m
+- Foreground: [38;2;34;139;34m ForestGreen - RGB(34,139,34) [38;2;102;51;153m RebeccaPurple - RGB(102,51,153) [0m
+- Background: [48;2;34;139;34m ForestGreen - RGB(34,139,34) [48;2;102;51;153m RebeccaPurple - RGB(102,51,153) [0m
+- Reversed:   [7;38;2;34;139;34m ForestGreen - RGB(34,139,34) [7;38;2;102;51;153m RebeccaPurple - RGB(102,51,153) [0m
+
+[1;4mFont styles:[0m
+- Default
+- [1mBold[0m
+- [2mDimmed[0m
+- [3mItalic[0m
+- [4mUnderline[0m
+- [7mReversed[0m
+- [9mStrikethrough[0m
+```
+
+## Headings
+
+- [remark-heading-id](https://github.com/imcuttle/remark-heading-id)
+- [rehype-slug](https://github.com/rehypejs/rehype-slug)
+- [rehype-autolink-headings](https://github.com/rehypejs/rehype-autolink-headings)
+
+# H1
+
+## H2
+
+### H3
+
+#### H4
+
+##### H5
+
+###### H6
+
+## Paragraph
+
+<Tweet id="https://twitter.com/astrodotbuild/status/1511750228428435457" />
+
+AstroでMarkdownコンテンツを書くときに使用できる基本的なMarkdown
+
+<BaselineStatus id="font-size-adjust" />
+
+<BaselineStatus id="text-autospace" />
+
+## Font
+
+可読性をしっかりと担保できるように、人気が高く広く採用されている数種類のフリーフォントを使用して、和欧混植で組版しています。
+Windowsに標準搭載されたNoto Sans JPやNoto Serif JPを中心に。
+
+### Sans-serif Font
+
+- [Inter （ Google Font ）](https://fonts.google.com/specimen/Inter)
+- [Noto Sans JP （ Google Font ）](https://fonts.google.com/noto/specimen/Noto+Sans+JP?query=noto+sans+jp)
+- [YakuHanJPs （ Local Font ）](https://yakuhanjp.qranoko.jp/)<br/>ゴシック体用の括弧類のみ 〈〉《》「」『』【】〔〕（）［］｛｝
+
+<h3 id="serif-font">Serif Font</h3>
+
+- [Noto Serif （ Google Font ）](https://fonts.google.com/noto/specimen/Noto+Serif)
+- [Noto Serif JP （ Google Font ）](https://fonts.google.com/noto/specimen/Noto+Serif+JP?query=Noto+Serif+JP)
+- [YakuHaMPs （ Local Font ）](https://yakuhanjp.qranoko.jp/)<br/>明朝体用の括弧類のみ 〈〉《》「」『』【】〔〕（）［］｛｝
+
+<h3 id="mono-font"> Monospace Font </h3>
+
+- [CommitMono（Local Font）](https://commitmono.com/) <span class="font-sans">コードブロックでの使用が主目的。`Inter`との親和性の高さが決め手。</span>
+
+```css title="example.tsx" caption="react"
+{
+  --font-*: initial;
+
+  --font-sans:
+    "YakuHanJPs", "Inter Variable", "Noto Sans JP Variable",
+    /* Tailwind CSS default fallback */
+    ui-sans-serif, system-ui, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --font-serif:
+    "YakuHanMPs", "Noto Serif Variable", "Noto Serif JP Variable",
+    /* Tailwind CSS default fallback */
+    ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --font-mono:
+    CommitMono,
+    /* Tailwind CSS default fallback */
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+```
+
+```css title="example.tsx"
+{
+  --font-*: initial;
+
+  --font-sans:
+    "YakuHanJPs", "Inter Variable", "Noto Sans JP Variable",
+    /* Tailwind CSS default fallback */
+    ui-sans-serif, system-ui, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --font-serif:
+    "YakuHanMPs", "Noto Serif Variable", "Noto Serif JP Variable",
+    /* Tailwind CSS default fallback */
+    ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --font-mono:
+    CommitMono,
+    /* Tailwind CSS default fallback */
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+```
+
+```css caption="react"
+{
+  --font-*: initial;
+
+  --font-sans:
+    "YakuHanJPs", "Inter Variable", "Noto Sans JP Variable",
+    /* Tailwind CSS default fallback */
+    ui-sans-serif, system-ui, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --font-serif:
+    "YakuHanMPs", "Noto Serif Variable", "Noto Serif JP Variable",
+    /* Tailwind CSS default fallback */
+    ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --font-mono:
+    CommitMono,
+    /* Tailwind CSS default fallback */
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+```
+
+## Images
+
+### Syntax
+
+```js
+const add = () => {};
+```
+
+### Output
+
+![blog placeholder](./assets/blog-placeholder-about.jpg)
+
+## Blockquotes
+
+The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
+
+> <p lang="en">
+>   Resources for Developers, by Developers. Documenting web
+>   technologies,including CSS, HTML, and JavaScript, since 2005.
+> </p>
+>
+> <p lang="ja">
+>   開発者による開発者向けリソース。2005年以来、CSS、HTML、JavaScriptなどのWebテクノロジーをドキュメント化しています。
+> </p>
+>
+> @ 出典: Mozilla. <cite>["MDN Web Docs"](https://developer.mozilla.org/ja/).</cite> MDN Web Docs. (参照 2025-12-28)
+
+### Blockquote without attribution
+
+#### Syntax
+
+```markdown
+> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
+> **Note** that you can use _Markdown syntax_ within a blockquote.
+```
+
+#### Output
+
+> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
+> **Note** that you can use _Markdown syntax_ within a blockquote.
+
+### Blockquote with attribution
+
+> We cannot solve our problems with the same thinking we used when we created them.
+>
+> @ Albert Einstein
+
+> [!TIP]
+> Rehype Pretty Codeを利用するには、Shikiの二重適用を避けるためにAstroの設定において`markdown.syntaxHighlight`または`mdx.syntaxHighlight`を`false`に設定すべき。
+
+#### Syntax
+
+```markdown
+> Don't communicate by sharing memory, share memory by communicating.<br>
+> — <cite>Rob Pike[^1]</cite>
+```
+
+#### Output
+
+> Don't communicate by sharing memory, share memory by communicating.
+> — <cite>Rob Pike[^1]</cite>
+
+[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
+
+## Tables
+
+### Syntax
+
+```markdown
+| Italics   | Bold     | Code   |
+| --------- | -------- | ------ |
+| _italics_ | **bold** | `code` |
+```
+
+### Output
+
+| Italics   | Bold     | Code   |
+| --------- | -------- | ------ |
+| _italics_ | **bold** | `code` |
+
+## Code Blocks
+
+そもそもAstroには、構文強調に対応するためにShikiが組み込まれている。基本的な機能としては十分だが、Astroが内部処理しているShiki連携の出力結果は硬直的である。
+
+当ブログでは、より柔軟な表現力を獲得するためShikiの基盤を活かしながらも、特定の行や語句の装飾をより宣言的に記述するためにExpressive Codeを導入した。
+
+> [!TIP]
+> Rehype Pretty Codeを利用するには、Shikiの二重適用を避けるためにAstroの設定において`markdown.syntaxHighlight`または`mdx.syntaxHighlight`を`false`に設定すべき。
+>
+> ```js title="astro.config.mjs"
+> import rehypePrettyCode from "rehype-pretty-code";
+> /* another import */
+> export default defineConfig({
+>   /* another config */
+>   markdown: {
+>     syntaxHighlight: false, //[!code ++]
+>     /* another options */
+>     rehypePlugins: [rehypePrettyCode],
+>     /* ... */
+>   },
+> });
+> ```
+
+```html title="e.g., Nomal"
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIVOVI Tech Blog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/index.js" defer></script>
+    <!-- [!code ++] -->
+  </head>
+  <body>
+    <!-- … -->
+  </body>
+</html>
+```
+
+```html title="e.g., Line Numbers" showLineNumbers
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIVOVI Tech Blog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <!-- … -->
+  </body>
+</html>
+```
+
+```html title="e.g., Line Numbers + Decoration" showLineNumbers {4-8}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIVOVI Tech Blog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <!-- [!code ++] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code --] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code warning] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code error] -->
+  </body>
+</html>
+```
+
+```html title="e.g., Line Numbers + Decoration + Foucs" showLineNumbers {4-8}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIVOVI Tech Blog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <!-- [!code ++] [!code focus] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code --] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code warning] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code error] -->
+  </body>
+</html>
+```
+
+### Syntax
+
+we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
+
+````markdown
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Example HTML5 Document</title>
+  </head>
+  <body>
+    <p>Test</p>
+  </body>
+</html>
+```
+````
+
+### Output
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Example HTML5 Document</title>
+  </head>
+  <body>
+    <p>Test</p>
+  </body>
+</html>
+```
+
+## List Types
+
+### Ordered List
+
+#### Syntax
+
+```markdown
+1. First item
+2. Second item
+3. Third item
+```
+
+#### Output
+
+1. First item
+2. Second item
+3. Third item
+
+### Unordered List
+
+#### Syntax
+
+```markdown
+- List item
+- Another item
+- And another item
+```
+
+#### Output
+
+- List item
+- Another item
+- And another item
+
+### Nested list
+
+#### Syntax
+
+```markdown
+- Fruit
+  - Apple
+  - Orange
+  - Banana
+- Dairy
+  - Milk
+  - Cheese
+```
+
+#### Output
+
+- Fruit
+  - Apple
+  - Orange
+  - Banana
+- Dairy
+  - Milk
+  - Cheese
+
+## Other Elements — abbr, sub, sup, kbd, mark
+
+### Syntax
+
+```markdown
+<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+
+H<sub>2</sub>O
+
+X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+
+Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+
+Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+```
+
+### Output
+
+<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+
+H<sub>2</sub>O
+
+X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+
+Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+
+Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.

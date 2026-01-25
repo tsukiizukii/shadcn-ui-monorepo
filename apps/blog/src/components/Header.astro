@@ -1,0 +1,24 @@
+---
+import Navigation from "@/components/Navigation.astro";
+import CommonHeader from "@workspace/ui/blocks/header";
+
+const links = [
+  {
+    title: "about",
+    href: "#about",
+  },
+  {
+    title: "posts",
+    href: "/posts",
+  },
+  {
+    title: "registry",
+    href: "https://registry.tsukiizukii.com",
+    external: true,
+  },
+];
+---
+
+<CommonHeader title="tsukiizukii Blog" client:load>
+  <Navigation links={links} />
+</CommonHeader>

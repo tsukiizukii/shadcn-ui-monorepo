@@ -1,0 +1,31 @@
+---
+import Navigation from "@/components/navigation";
+import CommonFooter from "@workspace/ui/blocks/footer";
+
+const links = [
+  {
+    title: "about",
+    href: "#about",
+  },
+  {
+    title: "blog",
+    href: "https://blog.tsukiizukii.com",
+    external: true,
+  },
+  {
+    title: "registry",
+    href: "https://registry.tsukiizukii.com",
+    external: true,
+  },
+];
+---
+
+<CommonFooter title="TSUKIIZUKII" client:load>
+  <Navigation
+    className="flex-col items-start"
+    links={links}
+    contact={false}
+    themeToggle={false}
+    client:load
+  />
+</CommonFooter>

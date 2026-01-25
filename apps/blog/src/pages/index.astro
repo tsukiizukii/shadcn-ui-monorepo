@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import AccentSection from "@workspace/ui/blocks/accent-section";
+import Hero from "@workspace/ui/blocks/hero";
+---
+
+<BaseLayout>
+  <Hero title="TECH BLOG" variant="blog" />
+  <main>
+    <AccentSection title="About">
+      <p>
+        フロントエンドを主軸に、日々の学びを通じた備忘録を執筆する予定です。稚拙な文章で恐縮ですが、同じ課題に直面している方のお役に立てれば幸いです。
+      </p>
+      <p>
+        記事の執筆や管理を簡易化するためのフレームワークとして、Astroを選定しました。Next.jsで構築しようかとも考えましたが、MarkdownやMDXの取り扱いがAstroの方がシンプルであること、またビルドサイズが小さくパフォーマンスに優れていることから、Astroを採用しました。
+      </p>
+    </AccentSection>
+  </main>
+</BaseLayout>

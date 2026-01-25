@@ -1,0 +1,10 @@
+---
+const props = Astro.props;
+const { class: className, ...rest } = props;
+
+// console.log(props);
+---
+
+<span class={className} {...rest}>
+  <slot />
+</span>

@@ -1,0 +1,299 @@
+/* Custom Valiants */
+/* :root {
+  &[style*="color-scheme"] code[data-theme*="github-dark-default"] {
+    background-color: var(--shiki-background);
+    color: var(--shiki);
+  }
+  &[style*="color-scheme"] code[data-theme*="github-dark-default"] span {
+    color: var(--shiki);
+  }
+} */
+
+figure:where([data-rehype-pretty-code-figure]) {
+  &:has(figcaption[data-rehype-pretty-code-caption]):not(
+      :has(div[data-rehype-pretty-code-title])
+    ) {
+    padding-top: 36px;
+  }
+}
+
+pre:where([data-theme]) {
+  margin-block: calc(var(--spacing) * 0);
+  padding-inline: calc(var(--spacing) * 0);
+  padding-block: calc(var(--spacing) * 5);
+  scrollbar-width: thin;
+  display: flex;
+  background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+  &:is(.dark *) {
+    background-color: var(--color-gray-900);
+  }
+
+  &:is(& > *) {
+    :is(& > *) {
+      flex-shrink: 0;
+    }
+  }
+
+  &:is(& > *) {
+    :is(& > *) {
+      flex-grow: 1;
+    }
+  }
+
+  &:is(& > *) {
+    :is(& > *) {
+      max-width: none;
+    }
+  }
+}
+
+/* Line Fade */
+pre:where([data-theme])::after {
+  position: absolute;
+  z-index: 10;
+  content: "";
+  pointer-events: none;
+  inset-block: calc(var(--spacing) * 0 + 10px);
+  top: calc(var(--spacing) * 0);
+  right: 1px;
+  width: calc(var(--spacing) * 7);
+  border-top-right-radius: 6px;
+  background: linear-gradient(to right, transparent, var(--color-gray-900));
+}
+
+/* Common */
+code:where([data-theme]) {
+  position: relative;
+  font-size: 13px;
+  width: 100%;
+
+  span[data-line] {
+    /*  */
+    padding-inline: calc(var(--spacing) * 3);
+
+    @apply px-3 transition-colors ease-in hover:bg-blue-400/10;
+
+    /* 装飾行 */
+    &:where([data-highlighted-line], .add, .remove, .warning, .error) {
+      @apply relative px-3;
+    }
+
+    /* 装飾行-共通設定 */
+    &:where(.add, .remove, .warning, .error) {
+      &::after {
+        @apply absolute left-0 min-w-[calc(1rem+6px)] text-center;
+      }
+    }
+
+    /* normal */
+    &[data-highlighted-line] {
+      @apply bg-blue-400/8;
+    }
+
+    /* + add */
+    &.add {
+      @apply border-green-500/56 bg-green-400/8;
+      &::after {
+        @apply text-green-500/56 content-['+'];
+      }
+    }
+
+    /* - remove */
+    &.remove {
+      @apply border-red-500/56 bg-red-400/8 [&_span]:text-[#6E7781] dark:[&_span]:text-[#8B949E];
+      &::after {
+        @apply text-red-500/56 content-['-'];
+      }
+    }
+
+    /* ⚠ warning */
+    &.warning {
+      @apply border-amber-500/56 bg-amber-400/8;
+      &::after {
+        @apply translate-y-[13%] text-[12px] text-amber-600/56 content-['⚠'] dark:text-amber-500;
+      }
+    }
+
+    /* ✗ error */
+    &.error {
+      @apply border-red-500/56 bg-red-400/8;
+      &::after {
+        @apply translate-y-[9%] text-[12px] text-red-500/56 content-['✗'];
+      }
+    }
+  }
+}
+
+/* Common line number digits */
+code:where([data-theme][data-line-numbers]) {
+  counter-reset: line;
+}
+
+code:where([data-theme][data-line-numbers]) span[data-line]::before {
+  content: counter(line);
+  counter-increment: line;
+  display: inline-block;
+  color: #6e7781;
+  margin-right: calc(var(--spacing) * 4);
+  text-align: right;
+  &:where(.dark, .dark *) {
+    color: #8b949e;
+  }
+}
+
+code:where([data-theme][data-line-numbers]) span[data-line] {
+  /* decorative line */
+  /* normal highlight */
+  &[data-highlighted-line]::before {
+    @apply text-blue-400;
+  }
+  /* + add highlight */
+  /* &.add::before {
+      @apply text-green-500;
+    } */
+  /* - remove highlight */
+  /* &.remove::before {
+      @apply text-red-500;
+    } */
+  /* ⚠ warning highlight */
+  /* &.warning::before {
+      @apply text-yellow-500;
+    } */
+  /* ✗ error highlight */
+  /* &.error::before {
+      @apply text-red-500;
+    } */
+}
+
+/* One-digit numbers */
+/*        (1–9)      */
+
+code:where([data-theme][data-line-numbers][data-line-numbers-max-digits="1"]) {
+  span[data-line]::before {
+    min-width: fit-content;
+  }
+
+  &:has(span:is(.add, .remove, .warning, .error)) {
+    span[data-line]::before {
+      min-width: calc(1rem + 6px);
+    }
+  }
+}
+
+/* Two-digit numbers */
+/*      (10–99)      */
+
+code:where([data-theme][data-line-numbers][data-line-numbers-max-digits="2"]) {
+  span[data-line]::before {
+    min-width: 17px;
+  }
+
+  &:has(span:is(.add, .remove, .warning, .error)) {
+    span[data-line]::before {
+      min-width: calc(1.5rem + 6px);
+    }
+  }
+}
+
+/* Three-digit numbers */
+/*       (100–999)      */
+
+code:where([data-theme][data-line-numbers][data-line-numbers-max-digits="3"]) {
+  span[data-line]::before {
+    min-width: 1.75rem;
+  }
+
+  &:has(span:is(.add, .remove, .warning, .error)) {
+    span[data-line]::before {
+      min-width: calc(1.75rem + 8px);
+    }
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*           No-digit numbers          */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+pre:is(.has-diff, .has-highlighted):not(:has(code[data-line-numbers])) {
+  /* 通常行 */
+  span[data-line] {
+    @apply pl-6;
+  }
+  /* 装飾行 */
+  span[data-line]:is(.add, .remove, .warning, .error) {
+    @apply pl-[calc(1.5rem-3px)];
+  }
+}
+
+/* 特定コード行をフォーカスする場合
+========================================================*/
+pre.has-focused {
+  span[data-line]:not(.focused) {
+    @apply blur-[3px] transition duration-300 ease-out;
+  }
+
+  &:hover {
+    span[data-line]:not(.focused) {
+      @apply blur-none;
+    }
+  }
+}
+
+/* インラインコード・スタイル
+========================================================*/
+span[data-rehype-pretty-code-figure] {
+  code[data-theme] {
+    @apply border border-foreground/10;
+    background-color: var(--color-shiki-background);
+    border-radius: var(--radius-sm);
+    margin-inline: 4px;
+    padding-inline: 3px;
+    overflow-wrap: break-word;
+  }
+
+  code[data-language=".token"] {
+    @apply border-none font-medium;
+    background-color: var(--color-shiki-background);
+    font-family: var(--font-sans);
+    font-size: inherit;
+  }
+}
+
+code:not([data-theme]) {
+  @apply border border-foreground/10;
+  padding-inline: 3px;
+  margin-inline: 4px;
+  color: inherit;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-sm);
+  display: inline;
+  background-color: var(--color-background);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-shiki-background);
+  }
+}
+
+/* 例外処理 */
+code:not([data-theme])[data-first-span],
+span[data-rehype-pretty-code-figure][data-first-span] code[data-theme] {
+  margin-left: 0;
+}
+
+/* ========================================================
+
+* レスポンシブ設定
+
+* ====================================================== */
+
+/* CustomTubsコンポーネント内のコードブロックは、shadcn/uiから提供されるタブの見出しと競合する */
+div[role="tabpanel"] {
+  /* Customコンポーネントを非表示 */
+  div[data-rehype-pretty-code-title],
+  figcaption:is(
+    [data-rehype-pretty-code-title],
+    [data-rehype-pretty-code-caption]
+  ) {
+    display: none;
+  }
+}

@@ -1,12 +1,20 @@
-import { Button } from "@workspace/ui/components/button"
+import SiteDescription from "@/components/description";
+import QuestionAccordion from "@/components/question";
+import Section from "@/components/section";
+import ContactCard from "@workspace/ui/blocks/contact-card";
+import Hero from "@workspace/ui/blocks/hero";
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
-      </div>
-    </div>
-  )
+    <>
+      <Hero title="LANDING PAGE" />
+      <main>
+        <Section title="about" />
+        <SiteDescription />
+        <Section title="question" />
+        <QuestionAccordion />
+        <ContactCard />
+      </main>
+    </>
+  );
 }

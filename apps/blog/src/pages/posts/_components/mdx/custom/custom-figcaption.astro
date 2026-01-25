@@ -1,0 +1,59 @@
+---
+const props = Astro.props;
+
+const activeRehypePrettyCode: boolean = Object.hasOwn(props, "data-language");
+
+const hasTitle: boolean =
+  activeRehypePrettyCode &&
+  Object.hasOwn(props, "data-rehype-pretty-code-title");
+
+const hasCaption: boolean =
+  activeRehypePrettyCode &&
+  Object.hasOwn(props, "data-rehype-pretty-code-caption");
+---
+
+{
+  hasTitle && (
+    <figcaption {...props} class="pb-2 pt-1 px-4 w-full mt-0">
+      <div class="flex items-center gap-2">
+        {/* <Image
+              unoptimized
+              height={20}
+              width={20}
+              src={`${cdnUrl}`}
+              alt={'Logo Icon'}
+              className="my-0! size-5"
+            /> */}
+        <span class="text-sm">
+          <slot />
+        </span>
+      </div>
+    </figcaption>
+  )
+}
+
+{
+  hasCaption && (
+    <figcaption {...props} class="absolute top-0 z-10 mx-4 mt-0  w-5">
+      <div class="absolute top-1/2 -translate-y-1/2">
+        {/* <Image
+              unoptimized
+              height={20}
+              width={20}
+              src={`${cdnUrl}`}
+              alt={'Logo Icon'}
+              className="my-0!"
+            /> */}
+      </div>
+      <slot />
+    </figcaption>
+  )
+}
+
+{
+  !activeRehypePrettyCode && (
+    <figcaption {...props}>
+      <slot />
+    </figcaption>
+  )
+}

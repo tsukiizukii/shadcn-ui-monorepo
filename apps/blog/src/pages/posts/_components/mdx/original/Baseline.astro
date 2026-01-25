@@ -1,0 +1,14 @@
+---
+type Props = {
+  id: string;
+};
+const { id } = Astro.props;
+---
+
+<div class="baseline-status bg-gray-900 p-4 pb-3 rounded-lg min-h-30 my-5">
+  <baseline-status featureId={id}></baseline-status>
+</div>
+
+<script>
+  import "baseline-status";
+</script>

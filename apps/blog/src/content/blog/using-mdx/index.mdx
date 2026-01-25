@@ -1,0 +1,134 @@
+---
+title: "Using MDX"
+description: "Lorem ipsum dolor sit amet"
+createdAt: "2026-1-21"
+heroImage: "./assets/blog-placeholder-5.jpg"
+---
+
+## Dark Mode
+
+アクセシビリティの観点から、ユーザーのシステム設定に基づいてウェブサイトのテーマを自動的に切り替えることは重要です。MDXを使用している場合、以下の方法でダークモードを実装できます。
+
+FIOD
+
+[prefers-color-scheme - MDN](https://developer.mozilla.org/ja/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme)
+<BaselineStatus id="prefers-color-scheme" />
+[window.matchMedia - MDN](https://developer.mozilla.org/ja/docs/Web/API/Window/matchMedia)
+<BaselineStatus id="matchmedia" />
+
+https://docs.astro.build/ja/reference/directives-reference/#isinline
+
+明暗の状態をどこで管理するかによって、実装方法が異なります。以下に、一般的なアプローチをいくつか紹介します。
+
+```jsx title="labeled-line-markers.jsx" {"1":5} del={"2":7-8} ins={"3":10-12} showLineNumbers
+<button
+  role="button"
+  {...props}
+  value={value}
+  className={buttonClassName}
+  disabled={disabled}
+  active={active}
+>
+  {children &&
+    !active &&
+    (typeof children === "string" ? <span>{children}</span> : children)}
+</button>
+```
+
+```jsx title="labeled-line-markers.jsx" {"1. Provide the value prop here:":4-5} del={"2. Remove the disabled and active states:":7-9} ins={"3. Add this to render the children inside the button:":11-14} showLineNumbers
+<button
+  role="button"
+  {...props}
+
+  value={value}
+  className={buttonClassName}
+
+  disabled={disabled}
+  active={active}
+>
+
+  {children &&
+    !active &&
+    (typeof children === "string" ? <span>{children}</span> : children)}
+</button>
+```
+
+```bash
+echo "This terminal frame has no title"
+```
+
+```powershell title="PowerShell terminal example"
+Write-Output "This one has a title!"
+```
+
+```js title="my-test-file.js"
+console.log("Title attribute example");
+```
+
+```html
+<!-- src/content/index.html -->
+<div>File name comment example</div>
+```
+
+```js
+console.log("This code is syntax highlighted!");
+```
+
+````md
+This top-level Markdown code block contains a nested `my-custom-lang` code block:
+
+```js
+console.log("This code is syntax highlighted!");
+```
+````
+
+```html title="e.g., Line Numbers + Decoration"  {4-8}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIVOVI Tech Blog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <h1>
+      Hello World Hello World Hello World ello World Hello World Hello World
+      ello World Hello World Hello World
+    </h1>
+
+    <h1>Hello World</h1>
+
+    <h1>Hello World</h1>
+
+    <h1>Hello World</h1>
+  </body>
+</html>
+```
+
+```html title="e.g., Line Numbers + Decoration + Foucs" showLineNumbers {4-8}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIVOVI Tech Blog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <!-- [!code ++] [!code focus] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code --] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code warning] -->
+
+    <h1>Hello World</h1>
+    <!-- [!code error] -->
+  </body>
+</html>
+```

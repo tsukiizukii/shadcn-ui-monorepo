@@ -1,0 +1,81 @@
+/* Style Sheet imports */
+@import "@workspace/ui/globals.css";
+@import "./gitHub-favored-markdown.css" layer(utilities);
+/* @import "./rehype-pretty-code.css"; */
+@import "./remark-github-blockquote-alert.css";
+@import "./rehype-semantic-blockquotes.css";
+
+/* TailwindCSS Plugin imports */
+@plugin "@tailwindcss/typography";
+
+/* Font imports */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/noto-sans-jp";
+@import "@fontsource-variable/noto-serif";
+@import "@fontsource-variable/noto-serif-jp";
+@import "yakuhanjp/dist/css/yakuhanjp_s.css";
+@import "yakuhanjp/dist/css/yakuhanmp_s.css";
+
+@font-face {
+  font-family: "CommitMono";
+  src: url("/fonts/CommitMono-VariableFont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --font-*: initial;
+
+  --font-sans:
+    "YakuHanJPs", "Inter Variable", "Noto Sans JP Variable",
+    /* Tailwind CSS default fallback => */ ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --font-serif:
+    "YakuHanMPs", "Noto Serif Variable", "Noto Serif JP Variable",
+    /* Tailwind CSS default fallback => */ ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+
+  --font-mono:
+    CommitMono, /* Tailwind CSS default fallback => */ ui-monospace,
+    SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+}
+
+.expressive-code {
+  background-color: var(--ec-frm-edTabBarBg);
+  @apply my-8;
+  @apply overflow-hidden rounded-lg border border-black/10 shadow-md dark:border-white/10;
+}
+
+.expressive-code .frame {
+  background-color: var(--ec-frm-edTabBarBg);
+  border-radius: 0px;
+}
+
+.expressive-code pre {
+  margin: calc(var(--spacing) * 1);
+  border-radius: 6px;
+}
+
+.expressive-code pre {
+  @apply border border-black/12 dark:border-white/10;
+}
+
+.expressive-code .frame.is-terminal .header {
+  border: none;
+}
+
+/* .expressive-code pre::after {
+  position: absolute;
+  z-index: 10;
+  content: "";
+  pointer-events: none;
+  inset-block: calc(var(--spacing) * 0 + 10px);
+  top: calc(var(--spacing) * 0);
+  right: 1px;
+  width: calc(var(--spacing) * 7);
+  border-top-right-radius: 6px;
+  background: linear-gradient(to right, transparent, var(--color-gray-900));
+} */

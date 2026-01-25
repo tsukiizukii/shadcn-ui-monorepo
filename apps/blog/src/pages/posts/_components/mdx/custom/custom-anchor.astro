@@ -1,0 +1,45 @@
+---
+import { IterationCw } from "lucide-react";
+
+const props = Astro.props;
+
+const { class: className, ...rest } = props;
+
+const isSubHeading = className?.includes("subheading-anchor");
+const isFootnoteBackref = className?.includes("data-footnote-backref");
+---
+
+{
+  isSubHeading && (
+    <a {...rest} class={className}>
+      <slot />
+    </a>
+  )
+}
+
+{
+  isFootnoteBackref && (
+    <a
+      {...rest}
+      class:list={[
+        "whitespace-nowrap no-underline hover:[&>svg]:rotate-90",
+        className,
+      ]}
+    >
+      <IterationCw
+        className="inline-block size-[1em] align-[-12%] transition-transform"
+        strokeWidth="2.25"
+      />
+      <sup>{rest["aria-label"]?.match(/\d+$/)?.[0]}</sup>
+      <span class="sr-only">本文へ戻る</span>
+    </a>
+  )
+}
+
+{
+  !isSubHeading && !isFootnoteBackref && (
+    <a {...rest} class={className} target="_blank" rel="noreferrer">
+      <slot />
+    </a>
+  )
+}

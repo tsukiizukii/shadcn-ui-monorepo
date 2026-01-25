@@ -1,0 +1,90 @@
+/* text style */
+figure[data-blockquote-container] {
+  /* margin-left: 2rem; */
+  border-inline-start-width: 3px;
+  border-color: var(--tw-prose-quote-borders);
+
+  blockquote[data-blockquote-content] {
+    font-family: var(--font-serif);
+    color: var(--tw-prose-body);
+    font-weight: 500;
+
+    p:where(:not([lang="ja"])) {
+      &:first-of-type::before {
+        content: "\201C\00A0";
+      }
+
+      &:last-of-type::after {
+        content: "\200A\201D";
+      }
+
+      &:has(+ p[lang="ja"])::after {
+        content: "\200A\201D";
+      }
+
+      & + p[lang="ja"]::before {
+        content: "「";
+      }
+    }
+
+    p[lang="ja"] {
+      font-style: normal;
+
+      &:first-of-type::before {
+        content: "「";
+      }
+
+      &:last-of-type::after {
+        content: "」\00A0（Google翻訳）";
+      }
+    }
+  }
+
+  figcaption[data-blockquote-credit] {
+    padding-inline-start: 1rem;
+
+    a {
+      border-color: currentColor;
+      @apply hover:border-transparent;
+    }
+  }
+}
+
+/* image style */
+figure[data-blockquote-container]:has(img) {
+  @apply rounded-lg border border-border/7 shadow-md dark:border-border/14;
+
+  blockquote[data-blockquote-content] {
+    padding-inline-start: 0;
+
+    p {
+      margin-block: 0;
+
+      &:first-of-type::before {
+        content: none;
+      }
+      &:first-of-type::after {
+        content: none;
+      }
+    }
+
+    img {
+      margin-block: 0px;
+      box-shadow: none;
+    }
+  }
+
+  figcaption[data-blockquote-credit] {
+    padding: 0;
+    margin: 0;
+
+    p {
+      margin-block: 0.5rem;
+      padding-inline: 0.5rem;
+      a {
+        border-color: currentColor;
+        @apply hover:border-transparent;
+      }
+    }
+  }
+}

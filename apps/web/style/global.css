@@ -1,0 +1,31 @@
+@import "@workspace/ui/globals.css";
+@import "yakuhanjp/dist/css/yakuhanjp_s.css";
+
+@theme inline {
+  --font-*: initial;
+  --font-sans:
+    "YakuHanJPs", var(--font-inter), var(--font-noto-sans-jp), ui-sans-serif,
+    system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    var(--font-commit-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --animate-aurora: aurora 90s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+}
+
+@utility custom-border-dashed {
+  @apply bg-linear-to-r from-foreground from-[3px] to-transparent to-[4px] bg-size-[8px_1px] bg-bottom-left bg-repeat-x;
+}

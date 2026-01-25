@@ -1,0 +1,199 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import ArticleFooter from "@/pages/posts/_components/Footer.astro";
+import ArticleHeader from "@/pages/posts/_components/Header.astro";
+import TableOfContents from "@/pages/posts/_components/mdx/original/table-of-contents";
+import type { MarkdownHeading } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"blog">["data"] & {
+  headings: MarkdownHeading[];
+};
+const { title, description, createdAt, updatedAt, heroImage, headings } =
+  Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <BaseHead title={title} description={description} />
+    <script is:inline>
+      // localStorageにデータがあるときはそちらを適用
+      if (typeof window.localStorage.getItem("theme") === "string") {
+        const currentTheme = window.localStorage.getItem("theme");
+        if (currentTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      }
+      // localStorageになにもない時はmatchMediaで判定
+      if (
+        typeof window.localStorage.getItem("theme") !== "string" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main
+      class="grid grid-cols-[1fr_minmax(0,var(--container-2xl))_1fr] gap-x-4 relative"
+    >
+      <article class="col-[2/3] w-full">
+        <ArticleHeader
+          title={title}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+          heroImage={heroImage}
+          headings={headings}
+        />
+        <section
+          class:list={[
+            ["prose dark:prose-invert max-w-none"],
+            // headings
+            ["prose-headings:scroll-mt-20"],
+
+            [
+              // h2
+              'prose-h2:[font-feature-settings:"palt"]',
+              "prose-h2:[word-break:auto-phrase]",
+            ],
+            // h3
+            [
+              'prose-h3:[font-feature-settings:"palt"]',
+              "prose-h3:[word-break:auto-phrase]",
+              // "prose-h3:mt-12"
+            ],
+            // h4
+            [
+              // "prose-h4:text-lg",
+              //  "prose-h4:mt-10"
+            ],
+            // h5
+            [
+              "prose-h5:w-fit",
+              // "prose-h5:text-base",
+              // "prose-h5:font-medium",
+              // "prose-h5:my-5",
+              // "prose-h5:text-(--tw-prose-headings)",
+              // "prose-h5:border-b",
+              // "prose-h5:border-(--tw-prose-hr)",
+            ],
+
+            [
+              // p
+              "prose-p:[line-break:strict]",
+              "prose-p:[word-break:normal]",
+              "prose-p:[overflow-wrap:anywhere]",
+              "prose-p:[text-autospace:normal]",
+              "prose-p:has-[img]:text-right",
+              "prose-p:has-[img+sup]:text-xs",
+              "prose-p:has-[img+sup]:text-(--tw-prose-captions)",
+            ],
+
+            [
+              // a
+              "prose-a:scroll-mt-32",
+              "prose-a:font-normal",
+              "prose-a:text-current",
+              "prose-a:decoration-1",
+              "prose-a:underline-offset-2",
+              "prose-a:transition-colors",
+              "prose-a:duration-300",
+              "prose-a:hover:decoration-transparent",
+              // "prose-a:visited:text-purple-900",
+              // "prose-a:visited:hover:text-purple-950",
+              // "prose-a:dark:visited:text-purple-300",
+              // "prose-a:dark:visited:hover:text-purple-400",
+              "prose-a:text-blue-600",
+              "prose-a:hover:text-blue-700",
+              "prose-a:dark:text-blue-300",
+              "prose-a:dark:hover:text-blue-400",
+            ],
+            // li
+            [
+              // "prose-li:marker:font-semibold",
+              // "prose-li:marker:text-blue-800",
+              // "dark:prose-li:marker:text-blue-400",
+            ],
+
+            [
+              // blockquote
+              "prose-blockquote:font-normal",
+              "prose-blockquote:border-none",
+            ],
+
+            [
+              // figure
+              "prose-figure:relative",
+            ],
+
+            [
+              // pre
+              // "prose-pre:my-0",
+              // "prose-pre:px-0",
+              // "prose-pre:py-5",
+              // "prose-pre:[scrollbar-width:thin]",
+            ],
+            // code
+            [
+              "prose-code:font-mono",
+              "prose-code:font-[425]",
+              'prose-code:[font-feature-settings:"ss01"_on,"ss02"_on,"ss03"_on,"ss04"_on,"ss05"_on,"cv02"_on,"cv04"_on]',
+              "prose-code:before:content-none",
+              "prose-code:after:content-none",
+            ],
+            // strong
+            [
+              "prose-strong:font-semibold",
+              "prose-strong:[&>a]:font-semibold",
+              "prose-strong:px-[1px]",
+              "prose-strong:bg-linear-to-b",
+              "prose-strong:from-transparent",
+              "prose-strong:from-70%",
+              "prose-strong:to-70%",
+              "prose-strong:to-purple-300",
+              "dark:prose-strong:to-purple-900",
+            ],
+            // b
+            ["prose-b:font-medium"],
+            // table
+            [
+              "prose-table:ring",
+              "prose-table:dark:ring-ring/14",
+              "prose-table:ring-ring/7",
+              "prose-table:shadow-md",
+              "prose-table:overflow-hidden",
+              "prose-table:rounded-lg",
+            ],
+            // thead
+            [
+              "prose-thead:bg-[hsl(240,7%,95%)]",
+              // "prose-thead:dark:bg-[hsl(240,7%,7%)]",
+              "prose-thead:border-border/7",
+              "prose-thead:dark:border-border/14",
+            ],
+            // tr
+            ["prose-tr:dark:border-border/14", "prose-tr:border-border/7"],
+            // th
+            ["prose-th:py-2", "prose-th:px-4", "prose-th:border-none"],
+            // td
+            ["prose-td:px-4"],
+          ]}
+        >
+          <slot />
+        </section>
+        <ArticleFooter />
+      </article>
+      <aside class="col-[3/4] sticky top-32 h-fit px-12 pb-12">
+        <TableOfContents
+          headings={Astro.props.headings}
+          minDepth={2}
+          maxDepth={3}
+        />
+      </aside>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,23 @@
+---
+import DesktopNavigation from "@/components/DesktopNavigation.astro";
+
+type NavigationLinks = Array<{
+  href: string;
+  title: string;
+  external?: boolean;
+}>;
+
+type Props = {
+  links: NavigationLinks;
+};
+
+const props = Astro.props;
+---
+
+<DesktopNavigation {...props} />
+
+<!-- <MobileNavigation
+  client:load
+  client:media={`(width < ${getCssVariable("--breakpoint-md")})`}
+  {...props}
+/> -->

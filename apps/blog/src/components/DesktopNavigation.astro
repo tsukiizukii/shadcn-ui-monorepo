@@ -1,0 +1,48 @@
+---
+import ContactButton from "@/components/contact-button";
+import NavigationLink from "@/components/navigation-link";
+import ThemeToggle from "@/components/theme-toggle";
+
+type NavigationLinks = Array<{
+  href: string;
+  title: string;
+  external?: boolean;
+}>;
+
+type Props = {
+  class?: string;
+  links: NavigationLinks;
+  contact?: boolean;
+  themeToggle?: boolean;
+};
+
+const {
+  class: className,
+  links,
+  contact = true,
+  themeToggle = true,
+  ...props
+} = Astro.props;
+---
+
+<nav class="flex items-center" {...props}>
+  <ul class:list={["flex items-center", className]}>
+    {
+      links.map((link) => (
+        <li>
+          <NavigationLink link={link} />
+        </li>
+      ))
+    }
+
+    {
+      contact && (
+        <li class="pl-2">
+          <ContactButton />
+        </li>
+      )
+    }
+  </ul>
+
+  {themeToggle && <ThemeToggle client:load className="ml-3" />}
+</nav>

@@ -1,0 +1,11 @@
+---
+interface Props {
+  date: Date;
+}
+import { format } from "date-fns";
+const { date } = Astro.props;
+---
+
+<time date-time={format(new Date(date), "yyyy-MM-dd")}>
+  {format(new Date(date), "yyyy/MM/dd")}
+</time>

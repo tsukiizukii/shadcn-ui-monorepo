@@ -1,0 +1,67 @@
+/* gitHub-favored-markdown */
+
+/* チェックリスト */
+ul.contains-task-list {
+  padding-inline-start: 0;
+  li.task-list-item {
+    list-style: none;
+    & > input[type="checkbox"] {
+      display: inline-block;
+      aspect-ratio: 1 / 1;
+      width: 15px;
+      margin-inline-end: 2px;
+      vertical-align: -6%;
+    }
+  }
+}
+
+/* 脚注 */
+section[data-footnotes] {
+  margin-block-end: 1.5rem;
+}
+
+a[data-footnote-backref] {
+  @apply transition-colors hover:text-blue-600 dark:hover:text-blue-500;
+  text-decoration-line: none;
+  font-feature-settings: "tnum";
+  color: inherit;
+  &::before {
+    content: "\2006[";
+  }
+  &::after {
+    content: "]\2005";
+  }
+}
+
+ol:has(li[id^="user-content-fn-"]) {
+  list-style: none;
+  padding-left: 2rem;
+  counter-reset: item;
+  font-size: 0.875em;
+  line-height: 1.4285714;
+
+  li {
+    position: relative;
+    counter-increment: item;
+    scroll-margin-top: calc(var(--spacing) * 32);
+    /* padding-left: 8px; */
+
+    &::before {
+      content: "[" counter(item) "]";
+      display: inline-block;
+      vertical-align: top;
+      position: absolute;
+      translate: -100%;
+      width: 2rem;
+      font-feature-settings: "tnum";
+    }
+
+    cite > a {
+      border-style: none;
+    }
+  }
+
+  p {
+    margin-block: 0;
+  }
+}

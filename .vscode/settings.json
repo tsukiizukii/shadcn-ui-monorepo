@@ -1,3 +1,38 @@
 {
-  "tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css"
+  "[mdx]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.wordWrap": "on",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.prettier": "never"
+    },
+    "files.trimTrailingWhitespace": false
+  },
+  // editor settings
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.prettier": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  // files settings
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  // search settings
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  // Tailwind CSS settings
+  "tailwindCSS.classFunctions": ["clsx", "twMerge", "cn", "cva", "cx"],
+  "tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css",
+  // TypeScript settings
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
