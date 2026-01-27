@@ -1,10 +1,10 @@
 ---
 import BlogPostLayout from "@/layouts/BlogPost.astro";
+import * as Custom from "@/pages/posts/_components/mdx/custom/index";
+import Baseline from "@/pages/posts/_components/mdx/original/Baseline.astro";
+import Callout from "@/pages/posts/_components/mdx/original/callout.tsx";
 import { BaselineStatus, Tweet, YouTube } from "astro-embed";
 import { type CollectionEntry, getCollection, render } from "astro:content";
-import * as Custom from "./_components/mdx/custom/index.ts";
-import Baseline from "./_components/mdx/original/Baseline.astro";
-import Callout from "./_components/mdx/original/callout.tsx";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
