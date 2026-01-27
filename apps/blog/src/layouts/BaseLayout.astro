@@ -8,6 +8,14 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
 
 <html lang="ja">
   <head>
+    <script is:inline>
+      // FOUC / Theme Flash
+      (function () {
+        const root = document.documentElement;
+        const theme = localStorage.getItem("theme");
+        root.classList.toggle("dark", theme !== "light");
+      })();
+    </script>
     <BaseHead title={title} description={description} />
   </head>
   <body class="font-sans">
@@ -16,23 +24,3 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
     <Footer />
   </body>
 </html>
-
-<script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-  })();
-
-  if (theme === "light") {
-    document.documentElement.classList.remove("dark");
-  } else {
-    document.documentElement.classList.add("dark");
-  }
-
-  window.localStorage.setItem("theme", theme);
-</script>

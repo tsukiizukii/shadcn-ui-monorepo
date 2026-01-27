@@ -1,5 +1,5 @@
 {
-  "name": "astro",
+  "name": "@tsukiizukii/blog",
   "version": "0.0.1",
   "type": "module",
   "private": true,
@@ -7,7 +7,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "typecheck": "astro check",
+    "gen:types": "astro sync",
+    "prepare": "astro sync"
   },
   "dependencies": {
     "@astrojs/vercel": "^9.0.4",
@@ -49,7 +54,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "astro": "^5.16.12",
+    "astro": "^5.16.15",
     "eslint": "catalog:",
     "eslint-plugin-astro": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",

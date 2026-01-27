@@ -17,23 +17,15 @@ const { title, description, createdAt, updatedAt, heroImage, headings } =
 
 <html lang="ja">
   <head>
-    <BaseHead title={title} description={description} />
     <script is:inline>
-      // localStorageにデータがあるときはそちらを適用
-      if (typeof window.localStorage.getItem("theme") === "string") {
-        const currentTheme = window.localStorage.getItem("theme");
-        if (currentTheme === "dark") {
-          document.documentElement.classList.add("dark");
-        }
-      }
-      // localStorageになにもない時はmatchMediaで判定
-      if (
-        typeof window.localStorage.getItem("theme") !== "string" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        document.documentElement.classList.add("dark");
-      }
+      // FOUC / Theme Flash
+      (function () {
+        const root = document.documentElement;
+        const theme = localStorage.getItem("theme");
+        root.classList.toggle("dark", theme !== "light");
+      })();
     </script>
+    <BaseHead title={title} description={description} />
   </head>
   <body>
     <Header />

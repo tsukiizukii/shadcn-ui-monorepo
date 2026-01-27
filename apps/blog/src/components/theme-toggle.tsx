@@ -1,5 +1,4 @@
-"use client";
-
+import { withoutThemeTransition } from "@/utils/withoutThemeTransition";
 import { Toggle } from "@workspace/ui/components/toggle";
 import {
   Tooltip,
@@ -8,54 +7,29 @@ import {
 } from "@workspace/ui/components/tooltip";
 import { cn } from "@workspace/ui/lib/utils";
 import Theme from "@workspace/ui/logos/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function ThemeToggle({ className }: { className?: string }) {
-  const [isTheme, setIsTheme] = useState<string>("light");
-
-  useEffect(() => {
-    const theme = (() => {
-      if (
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem("theme")
-      ) {
-        return localStorage.getItem("theme"); // 既存の値を使う
-      }
-
-      // localStorage に値がない場合のみ
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-      }
-
-      return "light";
-    })();
-
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-
-    // 初回のみ localStorage に保存（既存の値がない場合）
-    if (!localStorage.getItem("theme")) {
-      localStorage.setItem("theme", theme as string);
-    }
-
-    setIsTheme(theme as string);
-  }, []);
+  const [isTheme, setIsTheme] = useState(() =>
+    typeof window !== "undefined"
+      ? localStorage.getItem("theme") || "dark"
+      : "dark",
+  );
 
   const handleToggleClick = (checked: boolean) => {
-    const theme = checked ? "dark" : "light";
-    const element = document.documentElement;
+    withoutThemeTransition(() => {
+      const theme = checked ? "dark" : "light";
+      const element = document.documentElement;
 
-    if (theme === "dark") {
-      element.classList.add("dark");
-    } else {
-      element.classList.remove("dark");
-    }
+      if (theme === "dark") {
+        element.classList.add("dark");
+      } else {
+        element.classList.remove("dark");
+      }
 
-    localStorage.setItem("theme", theme);
-    setIsTheme(theme);
+      localStorage.setItem("theme", theme);
+      setIsTheme(theme);
+    });
   };
 
   return (

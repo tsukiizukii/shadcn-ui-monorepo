@@ -31,8 +31,20 @@
   },
   // Tailwind CSS settings
   "tailwindCSS.classFunctions": ["clsx", "twMerge", "cn", "cva", "cx"],
-  "tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css",
+  "tailwindCSS.experimental.configFile": "./packages/ui/src/styles/globals.css",
+
   // TypeScript settings
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  "cSpell.words": [
+    "blockquotes",
+    "codesandbox",
+    "giscus",
+    "jsdevtools",
+    "noto",
+    "nuqs",
+    "sandpack",
+    "shikijs"
+  ]
 }

@@ -12,6 +12,17 @@ import { config as baseConfig } from "./base.js";
  * @type {import("eslint").Linter.Config}
  * */
 export const nextJsConfig = [
+  {
+    ignores: [
+      ".next/**",
+      "node_modules/**",
+      "out/**",
+      "build/**",
+      "dist/**",
+      "public/**",
+    ],
+  },
+
   ...baseConfig,
 
   {

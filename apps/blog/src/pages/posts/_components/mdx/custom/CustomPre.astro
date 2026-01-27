@@ -8,27 +8,27 @@ const props = Astro.props;
 const plainText = props["data-copy"];
 // const output = parseEntities(html)
 
-const activeRehypePrettyCode =  Object.hasOwn(props, "data-theme");
+const activeRehypePrettyCode = Object.hasOwn(props, "data-theme");
 
 // console.log(output);
 ---
 
 {
   activeRehypePrettyCode ? (
+    <>
       <CopyButton
         value={plainText}
-        className={cn(
-          "absolute z-50 right-4 top-2",
-        )}
+        className={cn("absolute z-50 right-4 top-2")}
         client:load
       />
       <div class="relative overflow-hidden rounded-sm  *:inset-ring *:inset-ring-white/10 dark:*:inset-ring-white/5">
-        <pre {...props} >
+        <pre {...props}>
           <slot />
         </pre>
       </div>
+    </>
   ) : (
-    <pre {...props} >
+    <pre {...props}>
       <slot />
     </pre>
   )

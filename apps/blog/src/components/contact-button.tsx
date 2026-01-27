@@ -1,11 +1,8 @@
-"use client";
-
 import { Button } from "@workspace/ui/components/button";
-import { Send } from "lucide-react";
-type BaseButtonProps = Parameters<typeof Button>[0];
-type ButtonProps = Omit<BaseButtonProps, "asChild">;
-
 import { cn } from "@workspace/ui/lib/utils";
+import { Send } from "lucide-react";
+// type BaseButtonProps = Parameters<typeof Button>[0];
+// type ButtonProps = Omit<BaseButtonProps, "asChild">;
 
 type ContactButtonProps = {
   contact?: boolean;
@@ -15,6 +12,7 @@ type ContactButtonProps = {
 export default function ContactButton({ ...props }: ContactButtonProps) {
   return (
     <Button
+      {...props}
       asChild
       size="sm"
       className={cn(

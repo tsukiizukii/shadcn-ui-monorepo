@@ -2,50 +2,50 @@
   "name": "tsukiizukii-sites",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.26.1",
   "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky",
-    "dev:web": "pnpm --filter @tsukiizukii/web dev",
-    "dev:blog": "pnpm --filter @tsukiizukii/blog dev",
-    "dev:registry": "pnpm --filter @tsukiizukii/registry dev",
-    "dev:contact": "pnpm --filter @tsukiizukii/contact dev",
-    "build:web": "pnpm --filter @tsukiizukii/web build",
-    "build:blog": "pnpm --filter @tsukiizukii/blog build",
-    "build:registry": "pnpm --filter @tsukiizukii/registry build",
-    "build:contact": "pnpm --filter @tsukiizukii/contact build"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,astro,css}\"",
+    "--- 🌐 www.tsukiizukii.com": "",
+    "web:dev": "turbo run dev --filter=@tsukiizukii/web",
+    "web:build": "turbo run build --filter=@tsukiizukii/web",
+    "--- 📝 blog.tsukiizukii.com": "",
+    "blog:dev": "turbo run dev --filter=@tsukiizukii/blog",
+    "blog:build": "turbo run build --filter=@tsukiizukii/blog",
+    "--- 📦 registry.tsukiizukii.com": "",
+    "registry:dev": "turbo run dev --filter=@tsukiizukii/registry",
+    "registry:build": "turbo run build --filter=@tsukiizukii/registry",
+    "--- ✉️ contact.tsukiizukii.com": "",
+    "contact:dev": "turbo run dev --filter=@tsukiizukii/contact",
+    "contact:build": "turbo run build --filter=@tsukiizukii/contact",
+    "prepare": "husky"
   },
   "lint-staged": {
-    "apps/**/*.{js,ts,jsx,tsx}": [
+    "*.{js,mjs,cjs,ts,json}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "packages/ui/**/*.{js,ts,jsx,tsx}": [
+    "{apps,packages}/**/*.{js,mjs,cjs,jsx,ts,tsx,json,astro}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "packages/utils/**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "**/*.{json,md}": [
+    "{apps,packages}/**/*.css": [
       "prettier --write"
     ]
   },
   "devDependencies": {
-    "@types/minimatch": "^6.0.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "eslint": "catalog:",
     "eslint-plugin-astro": "^1.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "turbo": "^2.7.3",
+    "turbo": "^2.7.6",
     "typescript": "catalog:"
   },
   "engines": {

@@ -1,5 +1,4 @@
 import js from "@eslint/js";
-
 import pluginJsxA11y from "eslint-plugin-jsx-a11y";
 import "eslint-plugin-only-warn";
 import pluginTurbo from "eslint-plugin-turbo";
