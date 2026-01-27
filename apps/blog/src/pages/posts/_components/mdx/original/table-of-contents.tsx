@@ -9,6 +9,10 @@ type TableOfContentsProps = {
   maxDepth?: HeadingDepth;
 };
 
+type NestedHeading = MarkdownHeading & {
+  children: NestedHeading[];
+};
+
 export default function TableOfContents({
   headings,
   minDepth = 2,
@@ -24,8 +28,8 @@ export default function TableOfContents({
 
   // ネストした構造を作成
   const buildNestedToc = (items: MarkdownHeading[]) => {
-    const result: any[] = [];
-    const stack: any[] = [];
+    const result: NestedHeading[] = [];
+    const stack: NestedHeading[] = [];
 
     items.forEach((heading) => {
       const item = { ...heading, children: [] };
@@ -54,7 +58,7 @@ export default function TableOfContents({
 
   // console.log(nestedHeadings);
 
-  const renderTocItem = (item: any) => (
+  const renderTocItem = (item: NestedHeading) => (
     <li key={item.slug} className="flex flex-col items-start gap-2">
       <a
         href={`#${item.slug}`}
