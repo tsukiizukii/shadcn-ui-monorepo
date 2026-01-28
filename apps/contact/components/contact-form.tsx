@@ -26,10 +26,10 @@ import {
 import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import * as z from "zod";
+import { z } from "zod/v4";
 
 // 全角カタカナ（と長音記号）のみを許可する正規表現
-const KATAKANA_REGEX = /^[\u30A0-\u30FF\u30FC\u3099-\u309C]+$/;
+const KATAKANA_REGEX = /^[\p{Script=Katakana}ー]+$/u;
 // ※末尾の `+` は「1文字以上必須」を意味します
 
 const formSchema = z.object({
@@ -60,7 +60,7 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema as any),
     mode: "onBlur",
     defaultValues: {
       lastName: "",

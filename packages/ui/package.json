@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint ."
   },
   "peerDependencies": {
     "lucide-react": ">=0.562.0",

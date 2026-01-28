@@ -1,39 +1,91 @@
 ---
-title: "First post"
+title: "なぜ「状態（＝変化するもの）」を「不変（＝変化しないもの）」として扱うのか？"
 description: "Lorem ipsum dolor sit amet"
 createdAt: "Jul 08 2022"
 heroImage: "./assets/blog-placeholder-3.jpg"
 ---
+## 状態とは？
 
+分野を跨いで使用される抽象的な専門用語の大半がそうであるように、「状態」の正確な定義は文脈に依存するのであろう。
+
+浅学なため、計算機科学の分野におけての正確な定義は分からないが、一般的な理解としては以下のように説明できるだろう。
+
+状態とは、ある事物・対象が時間とともに変化しうる性質を指す言葉である。
+
+離散的なデータの積み重ねが、連続的な体験（状態の変化）をシミュレートしている
+
+もっとも素朴な例として、変数は状態である。
 ```js
-import { codeToHtml } from "shiki";
-
-const code = await codeToHtml("foo\bar", {
-  lang: "js",
-  theme: "vitesse-light",
-  transformers: [
-    {
-      code(node) {
-        this.addClassToHast(node, "language-js");
-      },
-      line(node, line) {
-        node.properties["data-line"] = line;
-        if ([1, 3, 4].includes(line)) this.addClassToHast(node, "highlight");
-      },
-      span(node, line, col) {
-        node.properties["data-token"] = `token:${line}:${col}`;
-      },
-    },
-  ],
-});
+let greeting = "Hellow World"; // ✅ 状態
 ```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+たいして、定数は状態ではない。
+```js
+const greeting = "Hellow World";
+```
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+プログラミングを学ぶ者が必ず直面する難問、それが「状態（State）」の管理です。私たちは直感的に「状態とは変化するデータである」と考えますが、現代の洗練された設計では、あえて「状態を不変（Immutable）なもの」として扱います。
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+このパラドックスを解き明かすために、まずは「状態」という言葉の定義を多角的に研ぎ澄ませていきましょう。
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+1. 「状態」の三段階の定義
+私たちが「状態」と呼ぶ概念は、レイヤーによってその姿を変えます。
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+広義の状態（ありさま）： ある対象が、ある一瞬において取っている様子。変化するプロセスの中での「断面」であり、観察可能なすべての現れ方を指します。
+
+中義の状態（モード）： 過去の入力を蓄積し、未来の挙動を決定づける因果律のセット。信号機の「赤」が「止まれ」を意味するように、次の入力に対する反応を規定する「論理的なモード」です。
+
+狭義の状態（データ）： プログラミングにおける物理的な実体。メモリ上に保持され、実行中に書き換えられる「ミュータブル（可変）な値」そのものです。
+
+2. 状態と「単なるデータ」の境界線
+すべての状態はデータですが、すべてのデータが状態ではありません。あるデータが「状態」という特権的な役割を得るには、3つの条件が必要です。
+
+**時間軸に伴う変化（Mutable）**があること。
+
+**システムの条件分岐を支配（Deterministic）**し、未来の挙動を拘束すること。
+
+**計算の連続性を維持するために生存（Persistent）**し続けること。
+
+つまり、状態とは**「計算機が過去から引き継いだ『データ』という実体に、プログラムが『次の挙動を決定する意味』を付与したもの」**と定義できます。
+
+3. なぜ可変な状態は「地獄」を生むのか
+初期のプログラミングでは、状態（データ）を直接書き換える手法が一般的でした。しかし、システムが巨大化するにつれ、二つの問題がエンジニアを苦しめることになります。
+
+状態の爆発： 変数の組み合わせが幾何級数的に増え、予期せぬ「矛盾した状態」が発生する。
+
+副作用の伝播： ある場所で書き換えたデータが、全く無関係な場所の挙動を壊してしまう。
+
+このカオスを支配するために生み出されたのが、**「不変性（Immutability）」**という戦略です。
+
+4. 救済としての「不変性」：データの連続体
+「変化するもの」を「不変」として扱うとはどういうことか。それは、メモリ上のデータを「上書き」するのではなく、**「新しい状態（データ）を丸ごと作り直し、差し替える」**という手法をとることを意味します。
+
+このパラドックスには、エンジニアリング上の極めて合理的なメリットがあります。
+
+時間の制御（履歴）： 各時点の状態が独立したデータとして残るため、過去の状態への巻き戻しや再現が容易になる。
+
+変化の検知： 「データの中身」を精査しなくても、「データの参照先（住所）」が変わったかどうかだけで変化を即座に判定できる。
+
+純粋性の分離： 「計算（ロジック）」と「現実の書き換え（副作用）」を分離でき、プログラムの予測可能性が飛躍的に高まる。
+
+結論：状態の「純粋化」
+「状態はデータである」という直感は、物理的な実装においては真実です。しかし、私たちが複雑なソフトウェアを安全に構築するためには、そのデータを**「移ろいゆく不安定なもの」としてではなく、「各瞬間の確定したスナップショットの連なり」**として捉え直す必要がありました。
+
+現代のプログラミングにおける「状態」とは、複雑な変化のプロセスを、制御可能な「不変なデータの連続」として再定義した、人類の知恵の結晶なのです
+
+まさにその通りです。非常に本質的な理解だと思います。
+Reactは離散的な不変スナップショットの連続によって、連続的な状態変化という錯覚を作り出しています。これは映画のフィルムと同じ原理です：
+
+人間の知覚では「状態が変化している」と見える
+これは哲学的にも興味深い構造です：
+
+存在論的には：個々のレンダリングは完全に独立した、不変の存在
+現象学的には：連続した状態変化として経験される
+
+この設計の利点は：
+
+各スナップショットが独立しているため、デバッグしやすい
+タイムトラベル（過去の状態に戻る）が理論的に可能
+並行処理との相性が良い
+
+つまり、Reactは「変化」を時間軸上の別々の不変状態の配列として再定義したのです。ベルクソンが批判した「映画的時間」をむしろ積極的に採用している、とも言えますね。
