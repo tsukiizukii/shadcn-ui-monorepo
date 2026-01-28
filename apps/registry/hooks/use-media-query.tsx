@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 
 type MediaQueries = Record<string, string>;
 
@@ -11,25 +11,28 @@ const defaultQueries: MediaQueries = {
 export function useMediaQueries<T extends MediaQueries>(mediaQueries?: T) {
   const queries = (mediaQueries ?? defaultQueries) as T;
 
-  // create lists (for CSR only)
-  const createMediaQueryLists = () =>
-    typeof window !== "undefined"
-      ? Object.values(queries).map((query) => window.matchMedia(query))
-      : null;
+  // メモ化して同じインスタンスを保持
+  const mediaQueryLists = useMemo(
+    () =>
+      typeof window !== "undefined"
+        ? Object.values(queries).map((query) => window.matchMedia(query))
+        : null,
+    [queries],
+  );
 
-  // static instance (same across renders)
-  const mediaQueryLists = createMediaQueryLists();
-
-  const subscribe = (callback: () => void) => {
-    mediaQueryLists?.forEach((list) =>
-      list.addEventListener("change", callback),
-    );
-
-    return () =>
+  const subscribe = useMemo(
+    () => (callback: () => void) => {
       mediaQueryLists?.forEach((list) =>
-        list.removeEventListener("change", callback),
+        list.addEventListener("change", callback),
       );
-  };
+
+      return () =>
+        mediaQueryLists?.forEach((list) =>
+          list.removeEventListener("change", callback),
+        );
+    },
+    [mediaQueryLists],
+  );
 
   const getSnapshot = (): boolean[] => {
     return mediaQueryLists?.map((list) => list.matches) ?? [];
@@ -43,12 +46,16 @@ export function useMediaQueries<T extends MediaQueries>(mediaQueries?: T) {
     getServerSnapshot,
   );
 
-  // assemble { key: boolean }
-  return (Object.keys(queries) as (keyof T)[]).reduce(
-    (acc, key, index) => {
-      acc[key] = values[index];
-      return acc;
-    },
-    {} as Record<keyof T, boolean>,
+  // 型安全にアセンブル
+  return useMemo(
+    () =>
+      (Object.keys(queries) as (keyof T)[]).reduce(
+        (acc, key, index) => {
+          acc[key] = values[index] ?? false; // undefined の場合は false
+          return acc;
+        },
+        {} as Record<keyof T, boolean>,
+      ),
+    [queries, values],
   );
 }
